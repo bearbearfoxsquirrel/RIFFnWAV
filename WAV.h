@@ -10,10 +10,11 @@ public:
 
     bool read(char* fileName);
     void save(char* fileName);
-    
+
 
     //Reverse sample
     void reverseSample();
+    void reverseSample(int startTime, int endTime);
 
     //Split sample into segments & re-concatenate
     void splitAndConcat();

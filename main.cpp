@@ -10,6 +10,7 @@ int main() {
 
     wavFile.read(wavFilePath);
     wavFile.reverseSample();
+    wavFile.reverseSample(5, 200);
     wavFile.save(wavFilePathSaveReverse);
     return 0;
 

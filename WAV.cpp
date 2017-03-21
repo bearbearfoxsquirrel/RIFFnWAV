@@ -8,7 +8,7 @@ WAV::WAV() {
 }
 
 WAV::~WAV() {
-
+    delete samples;
 }
 
 bool WAV::read(char *fileName) {
@@ -51,8 +51,18 @@ void WAV::save(char *fileName) {
 
 
 void WAV::reverseSample() {
+        short int tempSample;
+        for (unsigned int i = 0; i < numberOfSamples/2; i++) {
+            tempSample = samples[i];
+            samples[i] = samples[numberOfSamples - i];
+            samples[numberOfSamples - i] = tempSample;
+        }
+}
+
+void WAV::reverseSample(int startTime, int endTime) {
     short int tempSample;
-    for (unsigned int i = 0; i < numberOfSamples/2; i++) {
+   // int startSample = startTime *
+    for (unsigned int i = startTime; i < endTime / 2; i++) {
         tempSample = samples[i];
         samples[i] = samples[numberOfSamples - i];
         samples[numberOfSamples - i] = tempSample;
