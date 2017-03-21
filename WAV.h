@@ -14,7 +14,7 @@ public:
 
     //Reverse sample
     void reverseSample();
-    void reverseSample(int startTime, int endTime);
+    void reverseSample(double startTime, double endTime);
 
     //Split sample into segments & re-concatenate
     void splitAndConcat();

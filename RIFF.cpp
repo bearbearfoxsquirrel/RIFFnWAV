@@ -68,6 +68,14 @@ short int RIFF::getBytesPerSample() const {
     return bytesPerSample;
 }
 
+short int RIFF::getBitsPerSample() const {
+    return bitsPerSample;
+}
+
+int RIFF::getSampleRate() const {
+    return sampleRate;
+}
+
 unsigned int RIFF::getSizeOfData() const {
     return sizeOfData;
 }

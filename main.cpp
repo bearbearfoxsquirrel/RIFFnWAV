@@ -9,8 +9,8 @@ int main() {
     WAV wavFile;
 
     wavFile.read(wavFilePath);
-    wavFile.reverseSample();
-    wavFile.reverseSample(5, 200);
+   // wavFile.reverseSample();
+    wavFile.reverseSample(0.5, 1.5);
     wavFile.save(wavFilePathSaveReverse);
     return 0;
 

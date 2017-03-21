@@ -11,7 +11,10 @@ public:
     void write(ofstream& filestreamOut);
 
     short int getBytesPerSample() const;
+    short int getBitsPerSample() const;
     unsigned int getSizeOfData() const;
+    int getSampleRate() const;
+
 
 private:
     static const int RIFF_ID_LEN = 4;

@@ -59,12 +59,15 @@ void WAV::reverseSample() {
         }
 }
 
-void WAV::reverseSample(int startTime, int endTime) {
+void WAV::reverseSample(double startTime, double endTime) {
     short int tempSample;
-   // int startSample = startTime *
-    for (unsigned int i = startTime; i < endTime / 2; i++) {
+    int startSample = startTime * header.getSampleRate() * header.getBytesPerSample();
+    int endSample = endTime * header.getSampleRate() * header.getBytesPerSample();
+
+
+    for (unsigned int i = startSample; i < endSample / 2; i++) {
         tempSample = samples[i];
-        samples[i] = samples[numberOfSamples - i];
-        samples[numberOfSamples - i] = tempSample;
+        samples[i] = samples[endSample - i];
+        samples[endSample - i] = tempSample;
     }
 }
