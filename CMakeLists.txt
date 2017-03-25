@@ -8,6 +8,6 @@ set(SOURCE_FILES
     RIFF.cpp
     RIFF.h
     WAV.cpp
-    WAV.h SoundEditor.h SoundEditor.cpp)
+    WAV.h SoundEditor.h SoundEditor.cpp SoundIO.h SoundIO.cpp)
 
 add_executable(Speech_n_Wavs ${SOURCE_FILES})

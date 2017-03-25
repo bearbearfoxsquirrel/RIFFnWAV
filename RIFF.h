@@ -7,22 +7,78 @@ using namespace std;
 
 class RIFF {
 public:
-    bool read(ifstream& filestreamIn);
-    void write(ofstream& filestreamOut);
-
-    short int getBytesPerSample() const;
-    short int getBitsPerSample() const;
-    unsigned int getSizeOfData() const;
-    int getSampleRate() const;
-
-
-
-private:
     static const int RIFF_ID_LEN = 4;
     static const int WAVE_ID_LEN = 4;
     static const int FMT_LEN = 4;
     static const int DATA_LEN = 4;
+    static const char* RIFF_ID = "RIFF";
 
+    bool isValidRiffID(char *potentialRiffID);
+
+    RIFF();
+
+    RIFF(char *riffID, int fileSize, char *waveID, char *fmt, unsigned int formatLength, short formatTag,
+         short numberChannels, int sampleRate, int bytesPerSecond, short bytesPerSample, short bitsPerSample,
+         char *data, unsigned int sizeOfData);
+
+    (riffID, fileSize, waveID, fmt, formatLength, formatTag,
+     numberChannels, sampleRate, bytesPerSample, bitsPerSample, data, sizeOfData)
+
+    ~RIFF();
+
+    // bool read(ifstream& filestreamIn);
+   // void write(ofstream& filestreamOut);
+
+
+    //GETTERS
+    const char *getRiffID() const;
+
+    int getFileSize() const;
+
+    const char *getWaveID() const;
+
+    int getSampleRate() const;
+
+    const char *getFmt() const;
+
+    unsigned int getFormatLength() const;
+
+    short getFormatTag() const;
+
+    short getNumberChannels() const;
+
+    int getBytesPerSecond() const;
+
+    short int getBytesPerSample() const;
+
+    short int getBitsPerSample() const;
+
+    unsigned int getSizeOfData() const;
+
+    const char *getData() const;
+
+    //SETTERS
+    void setRiffID(char* riffID);
+
+    void setFileSize(int fileSize);
+
+    void setFormatLength(unsigned int formatLength);
+
+    void setBytesPerSecond(int bytesPerSecond);
+
+    void setBytesPerSample(short bytesPerSample);
+
+    void setBitsPerSample(short bitsPerSample);
+
+    void setNumberChannels(short numberChannels);
+
+    void setFormatTag(short formatTag);
+
+    void setSampleRate(int sampleRate);
+
+    void setSizeOfData(unsigned int sizeOfData);
+
+private:
     //RIFF Header Parameters
     char riffID[RIFF_ID_LEN];
     int fileSize;

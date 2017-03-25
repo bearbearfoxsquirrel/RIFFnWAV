@@ -8,6 +8,9 @@
 #include "WAV.h"
 
 class SoundEditor {
+public:
+    SoundEditor(WAV wav);
+    ~SoundEditor();
 
     void extractWAVSample(WAV wav, double startTime, double endTime); //Move to another thing
 
@@ -17,5 +20,7 @@ class SoundEditor {
 
     void reverseWAVSample(WAV wav, double startTime, double endTime);
 
+private:
+    WAV currentWavFile;
 };
 #endif //SPEECH_N_WAVS_SOUNDEDITOR_H

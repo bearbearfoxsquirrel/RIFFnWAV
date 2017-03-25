@@ -1,6 +1,4 @@
 #include "WAV.h"
-#include <iostream>
-#include <fstream>
 
 using namespace std;
 WAV::WAV() {
@@ -41,26 +39,7 @@ unsigned int WAV::getNumberOfSamples() const {
 }
 
 bool WAV::read(char *fileName) {
-    ifstream filestreamIn(fileName, ios::binary);
 
-    if (filestreamIn) {
-        if (header.read(filestreamIn)) {
-            numberOfSamples = header.getSizeOfData() / header.getBytesPerSample(); //work out the number of samples in the WAV file
-            samples = new short int[numberOfSamples]; //create an array of samples
-
-            filestreamIn.read((char*) samples, numberOfSamples * sizeof(short int)); //read samples in one go
-        } else {
-            //Error reading the RIFF header of the WAV file
-            cout << "Problem reading header file of " << fileName << endl;
-            return false;
-        }
-    } else {
-        //Error creating an ifstream from the specified fileName
-        cout << "Unable to open the file:" << fileName << endl;
-        return false;
-    }
-    filestreamIn.close();
-    return true;
 }
 
 void WAV::save(char *fileName) {

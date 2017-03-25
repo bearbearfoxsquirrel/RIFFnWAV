@@ -1,10 +1,12 @@
 #include <iostream>
 #include "RIFF.h"
+
+/*
 bool RIFF::read(ifstream &filestreamIn) {
     //Read values of header
     try {
         filestreamIn.read(riffID, RIFF_ID_LEN * sizeof(char));                          //get riffID
-        if (riffID[0] == 'R' && riffID[1] == 'I' && riffID[2] == 'F' && riffID[3] == 'F') {
+        if () {
             filestreamIn.read((char *) &fileSize, sizeof(int));               //get fileSize
             filestreamIn.read(waveID, WAVE_ID_LEN * sizeof(char));            //get waveID
             filestreamIn.read(fmt, FMT_LEN * sizeof(char));                   //get fmt
@@ -25,9 +27,15 @@ bool RIFF::read(ifstream &filestreamIn) {
         return false;
     }
     return true;
+}*/
+
+bool RIFF::isValidRiffID(char* potentialRiffID) {
+    for (short int i = 0; i < RIFF_ID_LEN; i++)
+        if (potentialRiffID[i] != RIFF_ID[i]) return false;
+    return true;
 }
 
-
+/*
 void RIFF::write(ofstream &filestreamOut) {
     try {
 
@@ -66,6 +74,7 @@ void RIFF::write(ofstream &filestreamOut) {
         filestreamOut.close();
     }
 }
+ */
 
 short int RIFF::getBytesPerSample() const {
     return bytesPerSample;
@@ -82,3 +91,87 @@ int RIFF::getSampleRate() const {
 unsigned int RIFF::getSizeOfData() const {
     return sizeOfData;
 }
+
+const char *RIFF::getRiffID() const {
+    return riffID;
+}
+
+int RIFF::getFileSize() const {
+    return fileSize;
+}
+
+void RIFF::setFileSize(int fileSize) {
+    RIFF::fileSize = fileSize;
+}
+
+const char *RIFF::getWaveID() const {
+    return waveID;
+}
+
+const char *RIFF::getFmt() const {
+    return fmt;
+}
+
+unsigned int RIFF::getFormatLength() const {
+    return formatLength;
+}
+
+void RIFF::setFormatLength(unsigned int formatLength) {
+    RIFF::formatLength = formatLength;
+}
+
+short RIFF::getFormatTag() const {
+    return formatTag;
+}
+
+void RIFF::setFormatTag(short formatTag) {
+    RIFF::formatTag = formatTag;
+}
+
+short RIFF::getNumberChannels() const {
+    return numberChannels;
+}
+
+void RIFF::setNumberChannels(short numberChannels) {
+    RIFF::numberChannels = numberChannels;
+}
+
+void RIFF::setSampleRate(int sampleRate) {
+    RIFF::sampleRate = sampleRate;
+}
+
+int RIFF::getBytesPerSecond() const {
+    return bytesPerSecond;
+}
+
+void RIFF::setBytesPerSecond(int bytesPerSecond) {
+    RIFF::bytesPerSecond = bytesPerSecond;
+}
+
+void RIFF::setBytesPerSample(short bytesPerSample) {
+    RIFF::bytesPerSample = bytesPerSample;
+}
+
+void RIFF::setBitsPerSample(short bitsPerSample) {
+    RIFF::bitsPerSample = bitsPerSample;
+}
+
+const char *RIFF::getData() const {
+    return data;
+}
+
+void RIFF::setSizeOfData(unsigned int sizeOfData) {
+    RIFF::sizeOfData = sizeOfData;
+}
+
+void RIFF::setRiffID(char *riffID) {
+    this->riffID =riffID;
+}
+
+RIFF::RIFF(char *riffID, int fileSize, char *waveID, char *fmt, unsigned int formatLength, short formatTag,
+           short numberChannels, int sampleRate, int bytesPerSecond, short bytesPerSample, short bitsPerSample,
+           char *data, unsigned int sizeOfData) : riffID(riffID), fileSize(fileSize), waveID(waveID), fmt(fmt),
+                                                  formatLength(formatLength), formatTag(formatTag),
+                                                  numberChannels(numberChannels), sampleRate(sampleRate),
+                                                  bytesPerSecond(bytesPerSecond), bytesPerSample(bytesPerSample),
+                                                  bitsPerSample(bitsPerSample), data(data), sizeOfData(sizeOfData) {}
