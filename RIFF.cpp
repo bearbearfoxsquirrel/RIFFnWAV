@@ -27,14 +27,17 @@ bool RIFF::read(ifstream &filestreamIn) {
     return true;
 }
 
+
 void RIFF::write(ofstream &filestreamOut) {
     try {
+
         if (riffID[0] == 'R' && riffID[1] == 'I' && riffID[2] == 'F' && riffID[3] == 'F') {
 
             for (int i = 0; i < RIFF_ID_LEN; i++)
                 filestreamOut.write(&riffID[i], sizeof(char));
 
             filestreamOut.write((char *) &fileSize, sizeof(int));//write fileSize
+
 
             for (int i = 0; i < WAVE_ID_LEN; i++)
                 filestreamOut.write(&waveID[i], sizeof(char));

@@ -16,6 +16,7 @@ public:
     int getSampleRate() const;
 
 
+
 private:
     static const int RIFF_ID_LEN = 4;
     static const int WAVE_ID_LEN = 4;

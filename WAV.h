@@ -11,13 +11,19 @@ public:
     bool read(char* fileName);
     void save(char* fileName);
 
+    //GETTERS
+    RIFF getHeader();
 
-    //Reverse sample
-    void reverseSample();
-    void reverseSample(double startTime, double endTime);
+    short int* getSamples() const; //Returns the whole sample array to the
 
-    //Split sample into segments & re-concatenate
-    void splitAndConcat();
+    short int getSample(int samplePostion) const;
+
+    short int* getSample(double startTime, double endTime) const; //Returns the samples within a certain start time and end time (in seconds)
+
+    unsigned int getNumberOfSamples() const;
+
+    //SETTERS
+    void setSample(short int sample, int position) const;
 
 private:
     //The WAV header

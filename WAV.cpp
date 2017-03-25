@@ -4,33 +4,63 @@
 
 using namespace std;
 WAV::WAV() {
-
+    //Not needed to initialise the wave file
 }
 
 WAV::~WAV() {
     delete samples;
 }
 
+RIFF WAV::getHeader() {
+    return header;
+}
+
+short int* WAV::getSamples() const {
+    return samples;
+}
+
+short int WAV::getSample(int samplePostion) const {
+    return samples[samplePostion];
+}
+
+short int* WAV::getSample(double startTime, double endTime) const {
+    int samplesPerSecond = header.getSampleRate() * header.getBytesPerSample();
+    int startSample = startTime * samplesPerSecond;
+    int endSample = endTime * samplesPerSecond;
+
+    int extractSamplesLength = endSample - startSample;
+    short int* extractedSamples = new short int[extractSamplesLength];
+
+    for (int i = 0; i < extractSamplesLength; i++)
+        extractedSamples[i] = samples[startSample + i];
+    return extractedSamples;
+}
+
+unsigned int WAV::getNumberOfSamples() const {
+    return numberOfSamples;
+}
+
 bool WAV::read(char *fileName) {
-    ifstream filestreamIn(fileName);
+    ifstream filestreamIn(fileName, ios::binary);
 
     if (filestreamIn) {
         if (header.read(filestreamIn)) {
             numberOfSamples = header.getSizeOfData() / header.getBytesPerSample(); //work out the number of samples in the WAV file
             samples = new short int[numberOfSamples]; //create an array of samples
 
-           // for (unsigned int i = 0; i < numberOfSamples; i++)
-             //   filestreamIn.read((char*)&(sample[i]), sizeof(short int));          //read samples, sample by sample
             filestreamIn.read((char*) samples, numberOfSamples * sizeof(short int)); //read samples in one go
-            filestreamIn.close();
         } else {
             //Error reading the RIFF header of the WAV file
             cout << "Problem reading header file of " << fileName << endl;
+            return false;
         }
     } else {
         //Error creating an ifstream from the specified fileName
         cout << "Unable to open the file:" << fileName << endl;
+        return false;
     }
+    filestreamIn.close();
+    return true;
 }
 
 void WAV::save(char *fileName) {
@@ -50,24 +80,4 @@ void WAV::save(char *fileName) {
 }
 
 
-void WAV::reverseSample() {
-        short int tempSample;
-        for (unsigned int i = 0; i < numberOfSamples/2; i++) {
-            tempSample = samples[i];
-            samples[i] = samples[numberOfSamples - i];
-            samples[numberOfSamples - i] = tempSample;
-        }
-}
 
-void WAV::reverseSample(double startTime, double endTime) {
-    short int tempSample;
-    int startSample = startTime * header.getSampleRate() * header.getBytesPerSample();
-    int endSample = endTime * header.getSampleRate() * header.getBytesPerSample();
-
-
-    for (unsigned int i = startSample; i < endSample / 2; i++) {
-        tempSample = samples[i];
-        samples[i] = samples[endSample - i];
-        samples[endSample - i] = tempSample;
-    }
-}
