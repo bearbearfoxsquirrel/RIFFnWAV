@@ -14,21 +14,24 @@ using namespace std;
 class SoundIO {
 public:
     SoundIO(char* path);
+    SoundIO();
 
-    ~SoundIO();
+  //  ~SoundIO();
 
-    ifstream getInputFileStream() const;
+  //  ifstream getInputFileStream() const;
 
     WAV* read(char* wavFilename);
 
-    RIFF* readWAVHeader();
+    RIFF readWAVHeader();
 
 private:
-    bool validateHeader(char* header);
+   // bool validateHeader(char header[]);
 
     char* path;
     ifstream* inputFileStream;
     ostream* fileOutputStream;
+
+    void initInputStream(char* wavFilename);
 
 };
 #endif //SPEECH_N_WAVS_SOUNDIO_H

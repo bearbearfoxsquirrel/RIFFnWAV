@@ -3,7 +3,11 @@
 //
 #include "SoundEditor.h"
 
-void SoundEditor::reverseWAVSample(WAV wav, double startTime, double endTime) {
+SoundEditor::SoundEditor(WAV wav) {
+    this->currentWavFile = wav;
+}
+
+void SoundEditor::reverseWAVSample(WAV  wav, double startTime, double endTime) {
     short int tempSample;
     int samplesPerSecond = wav.getHeader().getSampleRate() * wav.getHeader().getBytesPerSample();
     int startSample = startTime * samplesPerSecond;

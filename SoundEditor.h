@@ -10,7 +10,7 @@
 class SoundEditor {
 public:
     SoundEditor(WAV wav);
-    ~SoundEditor();
+   // ~SoundEditor();
 
     void extractWAVSample(WAV wav, double startTime, double endTime); //Move to another thing
 

@@ -11,18 +11,18 @@ public:
     static const int WAVE_ID_LEN = 4;
     static const int FMT_LEN = 4;
     static const int DATA_LEN = 4;
-    static const char* RIFF_ID = "RIFF";
+    const string RIFF_ID = "RIFF";
+
+    void operator=(const RIFF & riff);
 
     bool isValidRiffID(char *potentialRiffID);
 
     RIFF();
+    RIFF(RIFF const &riff) ;
 
-    RIFF(char *riffID, int fileSize, char *waveID, char *fmt, unsigned int formatLength, short formatTag,
+   /* RIFF(char *riffID, int fileSize, char *waveID, char *fmt, unsigned int formatLength, short formatTag,
          short numberChannels, int sampleRate, int bytesPerSecond, short bytesPerSample, short bitsPerSample,
-         char *data, unsigned int sizeOfData);
-
-    (riffID, fileSize, waveID, fmt, formatLength, formatTag,
-     numberChannels, sampleRate, bytesPerSample, bitsPerSample, data, sizeOfData)
+         char *data, unsigned int sizeOfData);*/
 
     ~RIFF();
 
@@ -62,6 +62,10 @@ public:
 
     void setFileSize(int fileSize);
 
+    void setFmt(char* fmt);
+
+    void setData(char *data);
+
     void setFormatLength(unsigned int formatLength);
 
     void setBytesPerSecond(int bytesPerSecond);
@@ -77,6 +81,10 @@ public:
     void setSampleRate(int sampleRate);
 
     void setSizeOfData(unsigned int sizeOfData);
+
+    void setWaveID(char* waveID);
+
+
 
 private:
     //RIFF Header Parameters

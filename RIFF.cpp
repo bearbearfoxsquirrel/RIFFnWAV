@@ -1,6 +1,45 @@
 #include <iostream>
 #include "RIFF.h"
 
+RIFF::RIFF() {
+
+}
+
+RIFF::~RIFF() {
+
+}
+
+RIFF::RIFF(RIFF const & riff ) : fileSize(riff.fileSize),
+formatLength(riff.formatLength), formatTag(riff.formatTag),
+numberChannels(riff.numberChannels), sampleRate(riff.sampleRate),
+bytesPerSecond(riff.bytesPerSecond), bytesPerSample(riff.bytesPerSample),
+bitsPerSample(riff.bitsPerSample), sizeOfData(riff.sizeOfData) {
+    for (int i = 0; i < RIFF_ID_LEN; i++) {
+        riffID[i] = riff.riffID[i];
+        waveID[i] = riff.waveID[i];
+        fmt[i] = riff.fmt[i];
+        data[i] = riff.data[i];
+    }
+}
+
+void RIFF::operator=(const RIFF & riff) {
+    setFileSize(riff.fileSize);
+    setFormatLength(riff.formatLength);
+    setNumberChannels(riff.numberChannels);
+    setSampleRate(riff.sampleRate);
+    setBytesPerSecond(riff.bytesPerSecond);
+    setBytesPerSample(riff.bytesPerSample);
+    setBitsPerSample(riff.bitsPerSample);
+    setSizeOfData(riff.sizeOfData);
+
+    for (int i = 0; i < RIFF_ID_LEN; i++) {
+        riffID[i] = riff.riffID[i];
+        waveID[i] = riff.waveID[i];
+        fmt[i] = riff.fmt[i];
+        data[i] = riff.data[i];
+    }
+}
+
 /*
 bool RIFF::read(ifstream &filestreamIn) {
     //Read values of header
@@ -164,14 +203,30 @@ void RIFF::setSizeOfData(unsigned int sizeOfData) {
     RIFF::sizeOfData = sizeOfData;
 }
 
-void RIFF::setRiffID(char *riffID) {
-    this->riffID =riffID;
+void RIFF::setRiffID(char* riffID) {
+    for (unsigned int i = 0; i < RIFF_ID_LEN; i++)
+        this->riffID[i] = riffID[i];
 }
 
-RIFF::RIFF(char *riffID, int fileSize, char *waveID, char *fmt, unsigned int formatLength, short formatTag,
+void RIFF::setWaveID(char *waveID) {
+    for (unsigned int i = 0; i < WAVE_ID_LEN; i++)
+        this->waveID[i] = waveID[i];
+}
+
+void RIFF::setFmt(char *fmt) {
+    for (unsigned int i = 0; i < FMT_LEN; i++)
+        this->fmt[i] = fmt[i];
+}
+
+void RIFF::setData(char *data) {
+    for (unsigned int i = 0; i < DATA_LEN; i++)
+        this->data[i] = data[i];
+}
+/*RIFF::RIFF(char *riffID, int fileSize, char *waveID, char *fmt, unsigned int formatLength, short formatTag,
            short numberChannels, int sampleRate, int bytesPerSecond, short bytesPerSample, short bitsPerSample,
            char *data, unsigned int sizeOfData) : riffID(riffID), fileSize(fileSize), waveID(waveID), fmt(fmt),
                                                   formatLength(formatLength), formatTag(formatTag),
                                                   numberChannels(numberChannels), sampleRate(sampleRate),
                                                   bytesPerSecond(bytesPerSecond), bytesPerSample(bytesPerSample),
-                                                  bitsPerSample(bitsPerSample), data(data), sizeOfData(sizeOfData) {}
+                                                  bitsPerSample(bitsPerSample), data(data), sizeOfData(sizeOfData) {}*/
+

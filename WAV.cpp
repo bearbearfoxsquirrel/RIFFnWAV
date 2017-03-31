@@ -5,6 +5,22 @@ WAV::WAV() {
     //Not needed to initialise the wave file
 }
 
+WAV::WAV(RIFF header) {
+    this->header = header;
+
+    //Not needed to initialise the wave file
+}
+void WAV::operator = (const WAV wav) {
+    this->header = wav.header;
+    this->numberOfSamples = wav.numberOfSamples;
+
+    //delete samples;
+ //   samples = new short int[numberOfSamples];
+
+    for (unsigned int i = 0; i < this->numberOfSamples; i++)
+        samples[i] = wav.samples[i];
+}
+
 WAV::~WAV() {
     delete samples;
 }
@@ -13,13 +29,31 @@ RIFF WAV::getHeader() {
     return header;
 }
 
+void WAV::setHeader(RIFF header)  {
+    this->header = header;
+}
+
+void WAV::setNumberOfSamples(unsigned int numberOfSamples) {
+    this->numberOfSamples = numberOfSamples;
+}
+
+void WAV::setSamples(short int *samples) {
+    for (int i = 0; i < numberOfSamples; i++)
+        this->samples[i] = samples[i];
+}
+
 short int* WAV::getSamples() const {
     return samples;
 }
 
-short int WAV::getSample(int samplePostion) const {
-    return samples[samplePostion];
+short int WAV::getSample(int samplePosition) const {
+    return samples[samplePosition];
 }
+
+void WAV::setSample(short int sample, int position) {
+    this->samples[position] = sample;
+}
+
 
 short int* WAV::getSample(double startTime, double endTime) const {
     int samplesPerSecond = header.getSampleRate() * header.getBytesPerSample();
@@ -37,11 +71,7 @@ short int* WAV::getSample(double startTime, double endTime) const {
 unsigned int WAV::getNumberOfSamples() const {
     return numberOfSamples;
 }
-
-bool WAV::read(char *fileName) {
-
-}
-
+/*
 void WAV::save(char *fileName) {
     ofstream filestreamOut(fileName);
 
@@ -60,3 +90,4 @@ void WAV::save(char *fileName) {
 
 
 
+*/
