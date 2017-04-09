@@ -15,7 +15,7 @@ public:
 
     void operator=(const RIFF & riff);
 
-    bool isValidRiffID(char *potentialRiffID);
+    bool isValidRiffID( char *potentialRiffID);
 
     RIFF();
     RIFF(RIFF const &riff) ;
@@ -25,10 +25,6 @@ public:
          char *data, unsigned int sizeOfData);*/
 
     ~RIFF();
-
-    // bool read(ifstream& filestreamIn);
-   // void write(ofstream& filestreamOut);
-
 
     //GETTERS
     const char *getRiffID() const;

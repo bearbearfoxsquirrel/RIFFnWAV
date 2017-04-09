@@ -37,9 +37,12 @@ void WAV::setNumberOfSamples(unsigned int numberOfSamples) {
     this->numberOfSamples = numberOfSamples;
 }
 
+
+
 void WAV::setSamples(short int *samples) {
-    for (int i = 0; i < numberOfSamples; i++)
-        this->samples[i] = samples[i];
+    this->samples = samples;
+    //for (int i = 0; i < numberOfSamples; i++)
+     //   this->samples[i] = samples[i];
 }
 
 short int* WAV::getSamples() const {

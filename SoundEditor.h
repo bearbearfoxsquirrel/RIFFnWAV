@@ -9,18 +9,20 @@
 
 class SoundEditor {
 public:
-    SoundEditor(WAV wav);
-   // ~SoundEditor();
+    SoundEditor(WAV *wav);
+    SoundEditor();
 
-    void extractWAVSample(WAV wav, double startTime, double endTime); //Move to another thing
+    // ~SoundEditor();
 
-    void concatWAV(WAV wavToConcat); //Move to another thing
+    void extractWAVSample(WAV *wav, double startTime, double endTime); //Move to another thing
 
-    void reverseWAV(WAV wav);
+    void concatWAV(WAV *wavToConcat); //Move to another thing
 
-    void reverseWAVSample(WAV wav, double startTime, double endTime);
+    void reverseWAV(WAV *wav);
+
+    void reverseWAVSample(WAV *wav, double startTime, double endTime);
 
 private:
-    WAV currentWavFile;
+    WAV *currentWavFile;
 };
 #endif //SPEECH_N_WAVS_SOUNDEDITOR_H

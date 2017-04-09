@@ -20,18 +20,24 @@ public:
 
   //  ifstream getInputFileStream() const;
 
-    WAV* read(char* wavFilename);
+    bool read(WAV *wav, char *wavFilename);
+    bool save(WAV *wav, char* outputFilename);
 
-    RIFF readWAVHeader();
+
 
 private:
-   // bool validateHeader(char header[]);
+    char* getFullPath(char* filename);
+
+    RIFF readWAVHeader();
+    bool saveWAVHeader(RIFF riff);
+    // bool validateHeader(char header[]);
 
     char* path;
     ifstream* inputFileStream;
     ostream* fileOutputStream;
 
     void initInputStream(char* wavFilename);
+    void initOutputStream(char *wavFilename);
 
 };
 #endif //SPEECH_N_WAVS_SOUNDIO_H

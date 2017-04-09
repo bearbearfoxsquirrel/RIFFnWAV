@@ -3,13 +3,17 @@
 //
 #include "SoundEditor.h"
 
-SoundEditor::SoundEditor(WAV wav) {
+SoundEditor::SoundEditor(WAV *wav) {
     this->currentWavFile = wav;
 }
 
-void SoundEditor::reverseWAVSample(WAV  wav, double startTime, double endTime) {
+SoundEditor::SoundEditor() {
+    this->currentWavFile = nullptr;
+}
+
+void SoundEditor::reverseWAVSample(WAV *wav, double startTime, double endTime) {
     short int tempSample;
-    int samplesPerSecond = wav.getHeader().getSampleRate() * wav.getHeader().getBytesPerSample();
+    int samplesPerSecond = wav->getHeader().getSampleRate() * wav->getHeader().getBytesPerSample();
     int startSample = startTime * samplesPerSecond;
     int endSample = endTime * samplesPerSecond;
 
@@ -17,22 +21,22 @@ void SoundEditor::reverseWAVSample(WAV  wav, double startTime, double endTime) {
     for (unsigned int currentStart = startSample; currentStart < endSample / 2; currentStart++) {
         currentEnd = endSample - currentStart;
         //Swap current start with current end in the wav file
-        tempSample = wav.getSample(currentStart);
-        wav.setSample(wav.getSample(currentStart), wav.getSample(currentEnd));
-        wav.setSample(tempSample, currentEnd);
+        tempSample = wav->getSample(currentStart);
+        wav->setSample(wav->getSample(currentEnd), currentStart); //sample value, position
+        wav->setSample(tempSample, currentEnd);
     }
 }
 
-void SoundEditor::reverseWAV(WAV wav) {
+void SoundEditor::reverseWAV(WAV *wav) {
     short int tempSample;
-    unsigned int numberOfSamples = wav.getNumberOfSamples();
+    unsigned int numberOfSamples = wav->getNumberOfSamples();
 
     unsigned int currentEnd;
     for (unsigned int currentStart = 0; currentStart <  numberOfSamples/ 2; currentStart++) {
         currentEnd = numberOfSamples - currentStart;
         //Swap current start with current end in the wav file
-        tempSample = wav.getSample(currentStart);
-        wav.setSample(wav.getSample(currentStart), wav.getSample(currentEnd));
-        wav.setSample(tempSample, currentEnd);
+        tempSample = wav->getSample(currentStart);
+        wav->setSample(wav->getSample(currentEnd), currentStart); //sample value, position
+        wav->setSample(tempSample, currentEnd);
     }
 }
